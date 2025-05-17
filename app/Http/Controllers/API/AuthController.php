@@ -55,5 +55,41 @@ class AuthController extends Controller
 }
 
 
+public function update(Request $request, $id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return response()->json(['message' => 'Usuario no encontrado'], 404);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'name' => 'string|max:255',
+        'email' => 'string|email|max:255|unique:users,email,' . $id,
+        'password' => 'nullable|string|min:6',
+        'telefono' => 'nullable|string|max:20' // Solo si manejas ese campo en la tabla
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
+
+    $user->name = $request->name ?? $user->name;
+    $user->email = $request->email ?? $user->email;
+
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password);
+    }
+
+    if ($request->has('telefono')) {
+        $user->telefono = $request->telefono;
+    }
+
+    $user->save();
+
+    return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user]);
+}
+
+
 
 }
