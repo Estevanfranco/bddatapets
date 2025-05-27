@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 
+use App\Http\Controllers\Api\CitaController;
 use App\Http\Controllers\Api\EmailController;
 
 Route::get('/user', function (Request $request) {
@@ -16,3 +17,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::put('/users/{id}', [AuthController::class, 'update']);
 Route::post('/EnviarCorreo', [EmailController::class, 'index']);
 
+
+
+Route::get('/citas', [CitaController::class, 'index']);
+Route::post('/citas', [CitaController::class, 'store']);
+Route::put('/citas/{id}', [CitaController::class, 'update']);
+Route::delete('/citas/{id}', [CitaController::class, 'destroy']);
