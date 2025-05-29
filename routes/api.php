@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PqrdsController;
+use App\Http\Controllers\API\ContactoController;
 
 
 
@@ -18,3 +19,5 @@ Route::put('/users/{id}', [AuthController::class, 'update']);
 Route::post('/EnviarCorreo', [EmailController::class, 'index']);
 
 Route::resource('pqrds', PqrdsController::class);
+
+Route::resource('contacto', ContactoController::class);
