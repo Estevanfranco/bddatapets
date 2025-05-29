@@ -14,5 +14,6 @@ class Cita extends Model
         'ciudad',
         'servicio',
         'fecha',
+        'user_id',
     ];
 }

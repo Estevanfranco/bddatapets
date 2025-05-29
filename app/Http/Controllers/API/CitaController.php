@@ -8,16 +8,26 @@ use Illuminate\Http\Request;
 
 class CitaController extends Controller
 {
-    public function index()
-    {
-        return response()->json(Cita::all());
-    }
+    public function index(Request $request)
+{
+    $userId = $request->query('user_id'); // Recibe como query param
+    $citas = Cita::where('user_id', $userId)->get();
+    return response()->json($citas);
+}
 
     public function store(Request $request)
-    {
-        $cita = Cita::create($request->all());
-        return response()->json($cita, 201);
-    }
+{
+    $request->validate([
+        'mascota' => 'required|string',
+        'ciudad' => 'required|string',
+        'servicio' => 'required|string',
+        'fecha' => 'required|date',
+        'user_id' => 'required|exists:users,id',
+    ]);
+
+    $cita = Cita::create($request->all());
+    return response()->json($cita, 201);
+}
 
     public function update(Request $request, $id)
     {
