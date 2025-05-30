@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cliente_id'); // Relación con tabla clientes
-            $table->string('nombre_mascota');
-            $table->date('fecha');
-            $table->time('hora');
-            $table->string('motivo')->nullable();
-            $table->string('estado');
-            $table->timestamps();
+            
+            // Aquí agregamos la relación con la tabla 'users'
+            $table->unsignedBigInteger('user_id'); // Campo que almacena el id del usuario
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            // Clave foránea
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->string('mascota');
+            $table->string('ciudad');
+            $table->string('servicio');
+            $table->date('fecha');
+
+            $table->timestamps();
         });
     }
 
