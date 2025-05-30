@@ -2,10 +2,18 @@
 
 return [
 
-'paths' => ['api/*'],
-'allowed_origins' => ['http://localhost:4200'],
-'allowed_methods' => ['*'],
-'allowed_headers' => ['*'],
+    'paths' => ['api/*'],
 
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => ['http://localhost:4200', 'http://localhost:60468'],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
+    'max_age' => 0,
+
+    'supports_credentials' => false,
 
 ];
