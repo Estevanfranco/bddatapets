@@ -42,4 +42,11 @@ class CitaController extends Controller
         $cita->delete();
         return response()->json(['mensaje' => 'Cita eliminada']);
     }
+
+    public function getAllCitas()
+    {
+        $citas = Cita::all();
+        return response()->json($citas);
+    }
+
 }

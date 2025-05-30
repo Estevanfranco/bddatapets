@@ -40,3 +40,5 @@ Route::get('/citas', [CitaController::class, 'index']);
 Route::post('/citas', [CitaController::class, 'store']);
 Route::put('/citas/{id}', [CitaController::class, 'update']);
 Route::delete('/citas/{id}', [CitaController::class, 'destroy']);
+
+Route::get('/admin/citas', [CitaController::class, 'getAllCitas']);
