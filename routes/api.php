@@ -31,6 +31,7 @@ Route::get('/user', function (Request $request) {
 // Rutas adicionales
 Route::apiResource('usuarios', UsuarioController::class);
 Route::apiResource('users', UserController::class);
+Route::post('/recuperar', [UserController::class, 'recuperarContrasena']);
 Route::apiResource('clientes', ClienteController::class); // ← Este también usa ClienteController
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
