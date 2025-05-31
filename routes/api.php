@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\PqrdsController;
+use App\Http\Controllers\API\ContactoController;
+
 
 use App\Http\Controllers\Api\CitaController;
 use App\Http\Controllers\Api\EmailController;
@@ -41,4 +44,5 @@ Route::post('/citas', [CitaController::class, 'store']);
 Route::put('/citas/{id}', [CitaController::class, 'update']);
 Route::delete('/citas/{id}', [CitaController::class, 'destroy']);
 
-Route::get('/admin/citas', [CitaController::class, 'getAllCitas']);
+Route::resource('contacto', ContactoController::class);
+Route::resource('pqrds', PqrdsController::class);
