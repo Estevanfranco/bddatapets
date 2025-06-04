@@ -12,25 +12,33 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
+    // 🎯 Acá personalizás el mensaje del campo "email"
+    $validator->setCustomMessages([
+        'email.unique' => 'Este correo ya está en uso. Por favor prueba con otro.',
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        return response()->json(['message' => 'Usuario registrado exitosamente', 'user' => $user]);
+    if ($validator->fails()) {
+        return response()->json([
+            'message' => 'Errores de validación',
+            'errors' => $validator->errors()
+        ], 422);
     }
+
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    return response()->json(['message' => 'Usuario registrado exitosamente', 'user' => $user]);
+}
 
     public function login(Request $request)
 {
