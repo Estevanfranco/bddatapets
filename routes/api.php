@@ -47,3 +47,5 @@ Route::delete('/citas/{id}', [CitaController::class, 'destroy']);
 
 Route::resource('contacto', ContactoController::class);
 Route::resource('pqrds', PqrdsController::class);
+
+Route::put('/users/{id}/aceptar-terminos', [UserController::class, 'aceptarTerminos']);

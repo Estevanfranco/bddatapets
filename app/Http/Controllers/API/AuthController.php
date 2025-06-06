@@ -40,7 +40,7 @@ class AuthController extends Controller
     return response()->json(['message' => 'Usuario registrado exitosamente', 'user' => $user]);
 }
 
-    public function login(Request $request)
+public function login(Request $request)
 {
     $credentials = $request->only('email', 'password');
 
@@ -49,17 +49,15 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Login correcto',
             'user' => [
-
+                'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                 'id' => $user->id
+                'acepto_terminos' => $user->acepto_terminos // 👈 lo agregás aquí
             ]
-            
         ]);
     }
 
     return response()->json(['message' => 'Credenciales incorrectas'], 401);
-    
 }
 
 

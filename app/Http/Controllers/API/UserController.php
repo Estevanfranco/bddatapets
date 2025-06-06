@@ -65,5 +65,19 @@ class UserController extends Controller
     return response()->json(['message' => 'Contraseña enviada al correo'], 200);
 }
 
+
+    public function aceptarTerminos(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->acepto_terminos = true;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Términos aceptados correctamente.',
+            'user' => $user
+        ]);
+    }
+
 }
 
